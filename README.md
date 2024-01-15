@@ -3,12 +3,15 @@
 ## Description
 This project is an implementation of the classic "rock paper scissors" game to be played in the browser console. In future lessons, a Graphical User Interface will be added for a more interactive experience.
 
+This was in TheOdinProject course. https://www.theodinproject.com/lessons/foundations-rock-paper-scissors
+
 ## How to Play
-To play the game, follow these steps in the browser console:
-1. Open your browser console.
-2. Copy and paste the game code into the console.
-3. Follow the on-screen instructions to input your choice (rock, paper, or scissors).
-4. See the result of the game in the console.
+1. Clone the project to your local machine.
+2. Open the `index.html` file in your web browser to access the game.
+3. You will be prompted to input your choice (rock, paper, or scissors) for each of the 5 rounds.
+4. After the 5 rounds, check the browser console (DevTools) to see the results of the game.
+
+*Note: For a more interactive experience, a Graphical User Interface will be added in future lessons.*
 
 ## Code Structure
 The code for this project is organized into the following main files:
