@@ -1,3 +1,17 @@
+const rockBtn = document.querySelector('#rock')
+const paperBtn = document.querySelector('#paper')
+const scissorsBtn = document.querySelector('#scissors')
+const result = document.querySelector('#result')
+const runningPlayerScore = document.querySelector('#runningPlayerScore')
+const runningComputerScore = document.querySelector('#runningComputerScore')
+const final = document.querySelector('#final')
+const finalResults = document.querySelector('#finalResults')
+const playAgainBtn = document.querySelector('#playAgain')
+
+let playerScore = 0
+let computerScore = 0
+
+
 const getComputerChoice = () => {
     let randomNumber = Math.random()
 
@@ -11,44 +25,76 @@ const getComputerChoice = () => {
 }
 
 const playRound = (playerSelection, computerSelection) => {
-    if(playerSelection.toLowerCase() === computerSelection.toLowerCase()){
+    if(playerSelection === computerSelection){
         return playRound(playerSelection, getComputerChoice())
     }
 
-    if(playerSelection.toLowerCase() === 'rock'){
-        if(computerSelection.toLowerCase() === 'scissors'){
+    if(playerSelection === 'Rock'){
+        if(computerSelection === 'Scissors'){
             return 'w'
-        } else if(computerSelection.toLowerCase() === 'paper'){
+        } else if(computerSelection === 'Paper'){
             return 'l'
         }
-    } else if(playerSelection.toLowerCase() === 'paper'){
-        if(computerSelection.toLowerCase() === 'rock'){
+    } else if(playerSelection === 'Paper'){
+        if(computerSelection === 'Rock'){
             return 'w'
-        } else if(computerSelection.toLowerCase() === 'scissors'){
+        } else if(computerSelection === 'Scissors'){
             return 'l'
         }
-    } else if(playerSelection.toLowerCase() === 'scissors'){
-        if(computerSelection.toLowerCase() === 'paper'){
+    } else if(playerSelection === 'Scissors'){
+        if(computerSelection === 'Paper'){
             return 'w'
-        } else if(computerSelection.toLowerCase() === 'rock'){
+        } else if(computerSelection === 'Rock'){
             return 'l'
         }
     }
 }
 
-const game = () => {
-    let playerScore = 0
-    let computerScore = 0
 
-    while(playerScore + computerScore < 5){
-        let roundOutcome = playRound(prompt("Rock, Paper, or Scissors?"), getComputerChoice())
+const game = (playerChoice) => {
+    let outcome = playRound(playerChoice, getComputerChoice())
 
-        roundOutcome === 'w' ?  playerScore += 1 : computerScore += 1
+    if(outcome === 'w'){
+        playerScore++
+        runningPlayerScore.textContent = playerScore
+    } else {
+        computerScore++
+        runningComputerScore.textContent = computerScore
     }
 
-    return playerScore < computerScore ? `You lost the series ${playerScore} out of ${computerScore} rounds` : `You Won the series!!!! ${playerScore} out of ${computerScore} rounds!!!!!!!!!!!!!!!!!!!!!!`
+    if(playerScore === 5){
+        final.classList.remove('hidden')
+        finalResults.textContent = `You have won the series with a score of ${playerScore}. Computer had ${computerScore}`
+    }
+
+    if(computerScore === 5){
+        final.classList.remove('hidden')
+        finalResults.textContent = `You have lost the series with a score of ${playerScore}. Computer had ${computerScore} `
+    }
 }
 
-let result = game()
+const restartGame = () => {
+    playerScore = 0
+    computerScore = 0
+    runningPlayerScore.textContent = 0
+    runningComputerScore.textContent = 0
+}
 
-console.log(result)
+
+
+rockBtn.addEventListener('click', () => {
+    result.textContent = game('Rock')
+})
+
+paperBtn.addEventListener('click', () => {
+    result.textContent = game('Paper')
+})
+
+scissorsBtn.addEventListener('click', () => {
+    result.textContent = game('Scissors')
+})
+
+playAgainBtn.addEventListener('click', () => {
+    final.classList.add('hidden')
+    restartGame()
+})
