@@ -21,3 +21,11 @@ body {
 .hidden {
     display: none;
 }
+
+.game-container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
